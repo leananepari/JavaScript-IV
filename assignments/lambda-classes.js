@@ -33,11 +33,19 @@ class Instructor extends Person {
     let choice = choices[Math.floor(Math.random() * choices.length)];
 
     function add(num) {
-      student.grade += num;
+      if (student.grade + num > 100) {
+        student.grade = 100;
+      } else {
+        student.grade += num;
+      }  
     }
 
     function subtract(num) {
-      student.grade -= num;
+      if (num > student.grade) {
+        student.grade + num;
+      } else {
+        student.grade -= num;
+      }
     }
     console.log('The original grade: ', student.grade)
     choice(randomNum);
@@ -63,6 +71,13 @@ class Student extends Person {
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}.`
+  }
+  graduate() {
+    if (this.grade >= 70) {
+      return `Congratulations, ${this.name}! You graduated!`
+    } else {
+      return 'You need to earn more points to graduate.'
+    }
   }
 }
 
@@ -121,3 +136,5 @@ console.log(anna.standUp('Web-21')) // 'Anna announces to Web-21, @channel stand
 console.log(anna.debugsCode(mary, anna.specialty)) //'Anna debugs Mary's code on JavaScript.'
 console.log(fred.gradeAStudent(mary)); //'The original grade: {}. Random number: {}. Students new grade: {}'
 console.log(mary.grade); // some random number
+console.log(anna.gradeAStudent(mary));
+console.log(mary.graduate()) 
