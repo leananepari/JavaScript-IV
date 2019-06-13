@@ -24,6 +24,25 @@ class Instructor extends Person {
   grade(student, subject) {
     return `${student} receives a perfect score on ${subject}.`
   }
+  gradeAStudent(student) {
+    let min = 1;
+    let max = 100;
+    let randomNum = Math.random() * (+max - +min) + +min;
+
+    let choices = [add, subtract];
+    let choice = choices[Math.floor(Math.random() * choices.length)];
+
+    function add(num) {
+      student.grade += num;
+    }
+
+    function subtract(num) {
+      student.grade -= num;
+    }
+    console.log('The original grade: ', student.grade)
+    choice(randomNum);
+    console.log('Random number: ', randomNum, ' Students new grade: ', student.grade);
+  }
 }
 
 class Student extends Person {
@@ -32,6 +51,7 @@ class Student extends Person {
     this.previousBackground = obj.previousBackground;
     this.className = obj.className;
     this.favSubjects = obj.favSubjects;
+    this.grade = obj.grade;
   }
   listsSubjects() {
     this.favSubjects.forEach(element => {
@@ -76,7 +96,8 @@ const mary = new Student({
   'location': 'SF',
   'previousBackground': 'accounting',
   'className': 'Web-21',
-  'favSubjects': ['JavaScript', 'Java', 'CSS']
+  'favSubjects': ['JavaScript', 'Java', 'CSS'],
+  'grade': 50
 })
 
 const anna = new ProjectManager({
@@ -98,3 +119,5 @@ console.log(mary.sprintChallenge('JavaScript-IV')) //'Mary has begun sprint chal
 console.log(anna.speak()) //'Hello, my name is Anna, I am from SF.'
 console.log(anna.standUp('Web-21')) // 'Anna announces to Web-21, @channel standy times!
 console.log(anna.debugsCode(mary, anna.specialty)) //'Anna debugs Mary's code on JavaScript.'
+console.log(fred.gradeAStudent(mary)); //'The original grade: {}. Random number: {}. Students new grade: {}'
+console.log(mary.grade); // some random number
